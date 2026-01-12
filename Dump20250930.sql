@@ -9,7 +9,7 @@ USE `setembroamarelo` ;
 CREATE TABLE IF NOT EXISTS `setembroamarelo`.`exercicio` (
   `id_exercicio` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NULL DEFAULT NULL,
-  `descricao` VARCHAR(1000) NULL DEFAULT NULL, -- CORRIGIDO AQUI
+  `descricao` VARCHAR(1000) NULL DEFAULT NULL, 
   `duracao` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id_exercicio`))
 ENGINE = InnoDB
