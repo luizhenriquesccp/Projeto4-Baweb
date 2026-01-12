@@ -1,0 +1,24 @@
+/* Estilos personalizados para as páginas de Login e Cadastro */
+
+.login-container {
+    transition: transform 0.3s ease;
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+}
+
+.form-control:focus {
+    border-color: #ffeb3b;
+    box-shadow: 0 0 0 0.25rem rgba(255, 235, 59, 0.25);
+}
+
+.btn-warning {
+    background-color: #ffeb3b;
+    border-color: #ffeb3b;
+}
+
+.btn-warning:hover {
+    background-color: #fbc02d;
+    border-color: #fbc02d;
+}
