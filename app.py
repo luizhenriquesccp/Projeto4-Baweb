@@ -197,3 +197,43 @@ def exibir_exercicio(id):
     cursor.close()
     conn.close()
     return render_template("ex.html", exercicio=exercicio, exercicios=exercicios)
+
+@app.route("/adicionar", methods=['GET', 'POST'])
+def adicionar_exercicio():
+    usuario_atual = session.get('usuario')
+    if not usuario_atual:
+        return redirect(url_for('login'))
+    if request.method == 'GET':
+        return render_template('adicionar_exercicio.html')
+
+    # POST: processa o formulário de adição de exercício
+    nome = request.form.get('nome')
+    duracao = request.form.get('duracao')
+    descricao = request.form.get('descricao')
+
+    if not nome or not duracao:
+        flash('Nome e duração são obrigatórios.')
+        return render_template('adicionar_exercicio.html', nome=nome, duracao=duracao, descricao=descricao)
+
+    try:
+        duracao_val = float(duracao)
+    except ValueError:
+        flash('Duração inválida. Use um número (minutos).')
+        return render_template('adicionar_exercicio.html', nome=nome, duracao=duracao, descricao=descricao)
+
+    conn = get_db()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "INSERT INTO exercicio (nome, duracao, descricao) VALUES (%s, %s, %s)",
+            (nome, duracao_val, descricao)
+        )
+        conn.commit()
+        flash('Exercício adicionado com sucesso.')
+        return redirect(url_for('lista_exercicios'))
+    except mysql.connector.Error as err:
+        flash(f'Erro ao adicionar exercício: {err}')
+        return render_template('adicionar_exercicio.html', nome=nome, duracao=duracao, descricao=descricao)
+    finally:
+        cursor.close()
+        conn.close()

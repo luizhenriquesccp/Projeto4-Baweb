@@ -8,6 +8,7 @@ body {
     background-color: #fce61a !important;
 }
 .navbar-brand {
+    font-size: 3rem;
     letter-spacing: 1px;
 }
 
@@ -40,4 +41,8 @@ footer.bg-warning {
 
 .navbar .nav-link {
     color: #000 !important;
+}
+
+.col-md-6.col-lg-4 {
+    margin-top: 20px;
 }
